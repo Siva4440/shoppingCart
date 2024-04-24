@@ -1,0 +1,29 @@
+.container{
+    text-align: center;
+    padding: 100px;
+}
+.btn1{
+    padding: 10px;
+    margin: 10px;
+ 
+}
+.btn2{
+    padding: 10px;
+    margin: 10px;
+    
+}
+.heading{
+    color:blue
+}
+.btn1:hover{
+    color: white;
+    background-color: green;
+}
+.btn2:hover{
+    color: white;
+    background-color: red;
+}
+.products{
+    padding: '20px';
+}
+
