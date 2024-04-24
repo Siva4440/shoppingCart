@@ -9,7 +9,7 @@ import Profile from "../Pages/Profile/profile";
 const Router = () => {
   return (
     
-    <BrowserRouter>
+    <BrowserRouter basename="shoppingCart">
     < Header />
       <Routes>
           <Route path="/" element={<Login/>}></Route>
