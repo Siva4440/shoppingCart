@@ -71,7 +71,7 @@ export default function Login() {
               variant="outlined"
               size="small"
               fullWidth
-              onChange={(e) => setEmail(dispatch(updateUserName(e.target.value)))}
+              onChange={(e) => dispatch(updateUserName(e.target.value))}
               error={Boolean(validationMsg.userNameMSg)}
               helperText={validationMsg.userNameMSg}
             />
