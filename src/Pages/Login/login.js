@@ -26,9 +26,8 @@ export default function Login() {
           }
         });
       }
-
   };
-
+  
   const validateForm=()=>{
     let isValid = true;
     const {userName,password}= data;
@@ -72,7 +71,7 @@ export default function Login() {
               variant="outlined"
               size="small"
               fullWidth
-              onChange={(e) => dispatch(updateUserName(e.target.value))}
+              onChange={(e) => setEmail(dispatch(updateUserName(e.target.value)))}
               error={Boolean(validationMsg.userNameMSg)}
               helperText={validationMsg.userNameMSg}
             />
@@ -99,7 +98,7 @@ export default function Login() {
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Button variant="contained" fullWidth onClick={onLoginClick}>
+            <Button variant="contained" onClick={onLoginClick} fullWidth >
               Login
             </Button>
           </Grid>
