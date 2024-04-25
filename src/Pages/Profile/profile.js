@@ -73,7 +73,7 @@ const Profile = () => {
                 <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="gender" defaultValue={gender}
               onChange={updateTextField} >
                 <FormControlLabel value="female" disabled={!isEditMode} control={<Radio />} label="Female"  />
-                <FormControlLabel value="male" disabled={!isEditMode} control={<Radio />} label="Male"    />
+                <FormControlLabel value="male"disabled={!isEditMode} control={<Radio />} label="Male"    />
                 </RadioGroup>
             </FormControl>
           </Grid>
