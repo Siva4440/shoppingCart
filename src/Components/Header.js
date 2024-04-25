@@ -60,6 +60,11 @@ function Header() {
     handleCloseUserMenu();
     navigate("/profile");
   };
+
+  const onProducsClick=()=>{
+    handleCloseNavMenu()
+    navigate('/products')
+  }
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -143,15 +148,14 @@ function Header() {
             Shopping-Cart
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+           
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                onClick={onProducsClick}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                Products
               </Button>
-            ))}
+       
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
