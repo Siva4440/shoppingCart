@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { updateProfile } from "../../Redux/loginSlice";
+import updateUsersService from '../../Services/updateAPI'
  
 
 
@@ -16,12 +17,18 @@ const Profile = () => {
     const dispatch = useDispatch();
     const [isEditMode, setIsEditMode]= useState(false)
     const data = useSelector(state=>state.login.userDetails)
-    const {firstName,lastName,phone,email,gender,password} = data;
+    const {firstName,lastName,phone,email,gender,password ,id} = data;
 
     const updateTextField=(e)=>{
       const {name,value}= e.target
       dispatch(updateProfile({[name]:value}))
       console.log("event", name,value)
+    }
+
+    const onUpdateClick=()=>{
+      setIsEditMode(false)
+      updateUsersService(id , {firstName,lastName,phone,email,gender,password })
+      
     }
 
     
@@ -76,9 +83,9 @@ const Profile = () => {
             </FormControl>
           </Grid>
  
-          {isEditMode &&
+          {isEditMode && 
             <Grid item xs={6}>
-            <Button fullWidth variant="contained" onClick={()=>setIsEditMode(false)}>Update Profile</Button>
+            <Button fullWidth variant="contained" onClick={onUpdateClick}>Update Profile</Button>
           </Grid>
           }
         </Grid>

@@ -1,25 +1,50 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Grid,  TextField, Typography } from "@mui/material";
-import { updatePassword, updateUserName ,updateUserDetails } from "../../Redux/loginSlice";
-import loginService  from "../../Services/loginAPI";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  updatePassword,
+  updateUserName,
+  updateUserDetails,
+} from "../../Redux/loginSlice";
+import loginService from "../../Services/loginAPI";
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const data= useSelector(state=> state.login)
+  const data = useSelector((state) => state.login);
 
-  const onLoginClick = ()=>{
-    loginService(data).then(res=>{
-     console.log("res",res)
-     dispatch(updateUserDetails(res?.data)) 
-     if(res.data !== false){
-      navigate("/products  ")
-     }
-       
-    })
+  const [validationMsg,setValidationMsg]= useState({userNameMSg:"", passwordMsg:""})
+
+  const onLoginClick = () => {
+
+      if(validateForm()){
+        loginService(data).then((res) => {
+          dispatch(updateUserDetails(res?.data));
+          { res.data && 
+            navigate("/products");
+          }
+        });
+      }
+
+  };
+
+  const validateForm=()=>{
+    let isValid = true;
+    const {userName,password}= data;
+    const validations={};
+
+    if(!userName){
+      validations.userNameMSg="User Name is Mandatory";
+      isValid=false
+    }
+    if(!password){
+      validations.passwordMsg="Password is mandatory"
+      isValid=false
+    }
+
+    setValidationMsg(validations)
+    return isValid;
   }
 
   return (
@@ -32,31 +57,54 @@ export default function Login() {
           border: "2px solid grey",
           marginTop: "8%",
           marginLeft: "30%",
-          padding:'20px'
+          padding: "20px",
         }}
       >
         <Grid container spacing={2}>
           <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom align="center">
-        Login
-      </Typography>
+            <Typography variant="h5" gutterBottom align="center">
+              Login
+            </Typography>
           </Grid>
           <Grid item xs={12}>
-          <TextField  label="Email"  variant="outlined" size="small" fullWidth onChange={e=> dispatch(updateUserName(e.target.value))} />
+            <TextField
+              label="Email"
+              variant="outlined"
+              size="small"
+              fullWidth
+              onChange={(e) => dispatch(updateUserName(e.target.value))}
+              error={Boolean(validationMsg.userNameMSg)}
+              helperText={validationMsg.userNameMSg}
+            />
           </Grid>
           <Grid item xs={12}>
-          <TextField  label="password" type="password" variant="outlined" size="small" fullWidth onChange={e=> dispatch(updatePassword(e.target.value))} />
+            <TextField
+              label="password"
+              type="password"
+              variant="outlined"
+              size="small"
+              fullWidth
+              onChange={(e) => dispatch(updatePassword(e.target.value))}
+              error={Boolean(validationMsg.passwordMsg)}
+              helperText={validationMsg.passwordMsg}
+            />
           </Grid>
           <Grid item xs={6}>
-          <Button variant="outlined" fullWidth onClick={()=>navigate('/registration')}>Create Account</Button>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={() => navigate("/registration")}
+            >
+              Create Account
+            </Button>
           </Grid>
           <Grid item xs={6}>
-          <Button variant="contained" fullWidth onClick={onLoginClick} >Login</Button>
+            <Button variant="contained" fullWidth onClick={onLoginClick}>
+              Login
+            </Button>
           </Grid>
-          
         </Grid>
       </Box>
-     
     </div>
   );
 }

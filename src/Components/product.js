@@ -6,10 +6,20 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Rating } from "@mui/material";
+import { updateProducts } from "../Redux/cartSlice";
+import { useDispatch } from "react-redux";
+
 
 export default function Product(props) {
+  const dispatch = useDispatch();
     const {prod}= props;
     const {thumbnail,brand ,title,price,rating}= prod;
+
+    const onAddClick=()=>{
+      dispatch(updateProducts(prod))
+
+    }
+   
   return (
     <Card sx={{ maxWidth: 345 } }>
       <CardMedia
@@ -32,7 +42,7 @@ export default function Product(props) {
         <Rating name="read-only" value={rating} readOnly></Rating>
       </CardContent>
       <CardActions>
-        <Button size="small">Add to cart</Button>
+        <Button size="small" onClick={onAddClick} >Add to cart</Button>
       </CardActions>
     </Card>
   );
