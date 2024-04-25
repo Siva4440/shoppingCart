@@ -70,10 +70,10 @@ const Profile = () => {
           <Grid item xs={6}>
             <FormControl>
                 <FormLabel id="demo-row-radio-buttons-group-label" >Gender</FormLabel>
-                <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="gender" disabled={!isEditMode}  defaultValue={gender}
+                <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="gender"   defaultValue={gender}
               onChange={updateTextField} >
-                <FormControlLabel value="female" control={<Radio />} label="Female"  />
-                <FormControlLabel value="male" control={<Radio />} label="Male"    />
+                <FormControlLabel value="female" disabled={!isEditMode} control={<Radio />} label="Female"  />
+                <FormControlLabel value="male" disabled={!isEditMode} control={<Radio />} label="Male"    />
                 </RadioGroup>
             </FormControl>
           </Grid>
